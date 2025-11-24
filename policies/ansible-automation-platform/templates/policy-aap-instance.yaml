@@ -37,7 +37,7 @@ spec:
                   namespace: {{ .Values.aap.namespace }}
                 type: Opaque
                 data:
-                  trusted-ca-bundle: {{ $configmap := (lookup "v1" "ConfigMap" "{{ .Values.gitops.argoNamespace }}" user-ca-bundle.data[service-ca.crt]) }}
+                  trusted-ca-bundle: test
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
