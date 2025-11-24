@@ -22,7 +22,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: aap-trusted-ca-bundle #figure this out
+          name: aap-cert-bundle #figure this out
           namespace: policies-autoshift
         spec:
           remediationAction: enforce # will be overridden by remediationAction in parent policy
