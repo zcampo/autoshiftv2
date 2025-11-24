@@ -19,7 +19,7 @@ hubClusterSets:
     labels:
       self-managed: 'true'
       # OpenShift version for cluster deployment and image mirroring
-      openshift-version: '4.18.22'
+      openshift-version: '4.19.19'
       ### OpenShift Gitops
       gitops: 'true' # is expected to be installed on all hub clusters
       gitops-subscription-name: openshift-gitops-operator
@@ -55,12 +55,12 @@ hubClusterSets:
       # Specify the names of your Peer files here
       metallb-peer-1: ''
       ### AAP
-      aap: 'false'
+      aap: 'true'
       aap-channel: 'stable-2.6'
       aap-install-plan-approval: Automatic
       aap-source: redhat-operators
       aap-source-namespace: openshift-marketplace
-      aap-hub-disabled: 'false'
+      aap-hub-disabled: 'true'
       ### AAP Hub Content File Storage
       aap-file-storage: 'true'
       aap-file_storage_storage_class: 'ocs-storagecluster-cephfs'
@@ -233,7 +233,7 @@ managedClusterSets:
   managed:
     labels:
       # OpenShift version for cluster deployment and image mirroring
-      openshift-version: '4.18.22'
+      openshift-version: '4.19.19'
       ### Infrastructure Nodes
       infra-nodes: ''
       infra-nodes-numcpu: ''
