@@ -5,39 +5,39 @@ metadata:
   name: user-ca-bundle
   labels:
     config.openshift.io/inject-trusted-cabundle: "true"
-# ---
-# apiVersion: policy.open-cluster-management.io/v1
-# kind: Policy
-# metadata:
-#   name: policy-aap-cert-bundle
-#   namespace: {{ .Values.policy_namespace }}
-#   annotations:
-#     policy.open-cluster-management.io/standards: AutoShiftv2
-#     policy.open-cluster-management.io/categories: Kubernetes MetalLB Operator
-#     policy.open-cluster-management.io/controls: OpenShift Standard
-# spec:
-#   disabled: false
-#   policy-templates:
-#     - objectDefinition:
-#         apiVersion: policy.open-cluster-management.io/v1
-#         kind: ConfigurationPolicy
-#         metadata:
-#           name: aap-trusted-ca-bundle #figure this out
-#           namespace: policies-autoshift
-#         spec:
-#           remediationAction: enforce # will be overridden by remediationAction in parent policy
-#           severity: high
-#           object-templates-raw: |
-#             - complianceType: musthave
-#               objectDefinition:
-#                 apiVersion: v1
-#                 kind: Secret
-#                 metadata:
-#                   name: {{ .Values.aap.cabundleName }}
-#                   namespace: {{ .Values.aap.namespace }}
-#                 type: Opaque
-#                 data:
-#                   trusted-ca-bundle: test
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-aap-cert-bundle
+  namespace: {{ .Values.policy_namespace }}
+  annotations:
+    policy.open-cluster-management.io/standards: AutoShiftv2
+    policy.open-cluster-management.io/categories: Kubernetes MetalLB Operator
+    policy.open-cluster-management.io/controls: OpenShift Standard
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: aap-trusted-ca-bundle #figure this out
+          namespace: policies-autoshift
+        spec:
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
+          severity: high
+          object-templates-raw: |
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: Secret
+                metadata:
+                  name: {{ .Values.aap.cabundleName }}
+                  namespace: {{ .Values.aap.namespace }}
+                type: Opaque
+                data:
+                  trusted-ca-bundle: test
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
