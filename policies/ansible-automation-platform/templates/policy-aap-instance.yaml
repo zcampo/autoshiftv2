@@ -42,9 +42,8 @@ spec:
                   name: {{ .Values.aap.cabundleName }}
                   namespace: {{ .Values.aap.namespace }}
                 type: Opaque
-                {{ $caBundleValue := index . "ca-bundle.crt" }}
                 data:
-                  trusted-ca-bundle: {{ (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle").data.$caBundleValue }}
+                  trusted-ca-bundle: {{ index (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle").data "ca-bundle.crt" }}
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
