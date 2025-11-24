@@ -55,7 +55,7 @@ hubClusterSets:
       # Specify the names of your Peer files here
       metallb-peer-1: ''
       ### AAP
-      aap: 'false'
+      aap: 'true'
       aap-channel: 'stable-2.6'
       aap-install-plan-approval: Automatic
       aap-source: redhat-operators
