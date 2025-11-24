@@ -43,7 +43,7 @@ spec:
                   namespace: {{ .Values.aap.namespace }}
                 type: Opaque
                 data:
-                  trusted-ca-bundle: {{ (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle").ca-bundle.crt }}
+                  trusted-ca-bundle: {{ (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle").data }}
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
