@@ -36,7 +36,7 @@ hubClusterSets:
       acm-availability-config: 'High'
       acm-observability: 'true'
       ### MetalLB
-      metallb: 'true'
+      metallb: 'false'
       metallb-subscription-name: metallb-operator
       # metallb-version: 'metallb-operator.v4.18.0-202509240837'
       metallb-source: redhat-operators
@@ -150,7 +150,7 @@ hubClusterSets:
       # nmstate-nncp-example-bond1: example-bond
       # nmstate-nncp-example-vlan10: example-vlan10
       ### Advanced Cluster Security
-      acs: 'true'
+      acs: 'false'
       acs-subscription-name: rhacs-operator
       # acs-version: 'rhacs-operator.v4.6.1'
       acs-egress-connectivity: Online
@@ -158,21 +158,21 @@ hubClusterSets:
       acs-source: redhat-operators
       acs-source-namespace: openshift-marketplace
       ### Developer Spaces
-      dev-spaces: 'true'
+      dev-spaces: 'false'
       dev-spaces-subscription-name: devspaces
       # dev-spaces-version: 'devspaces.v3.21.0'
       dev-spaces-channel: stable
       dev-spaces-source: redhat-operators
       dev-spaces-source-namespace: openshift-marketplace
       ### Developer Hub
-      dev-hub: 'true'
+      dev-hub: 'false'
       dev-hub-subscription-name: rhdh
       # dev-hub-version: 'rhdh.v1.5.0'
       dev-hub-channel: fast
       dev-hub-source: redhat-operators
       dev-hub-source-namespace: openshift-marketplace
       ### OpenShift Pipelines
-      pipelines: 'true'
+      pipelines: 'false'
       pipelines-subscription-name: openshift-pipelines-operator-rh
       # pipelines-version: 'openshift-pipelines-operator-rh.v1.18.1'
       pipelines-channel: latest
@@ -186,18 +186,18 @@ hubClusterSets:
       tas-source: redhat-operators
       tas-source-namespace: openshift-marketplace
       ### Quay
-      quay: 'true'
+      quay: 'false'
       quay-subscription-name: quay-operator
       # quay-version: 'quay-operator.v3.15.0'
       quay-channel: stable-3.15
       quay-source: redhat-operators
       quay-source-namespace: openshift-marketplace
       ### Developer OpenShift Gitops
-      gitops-dev: 'true'
+      gitops-dev: 'false'
       gitops-dev-team-test: 'hub' #hub or standalone
       # gitops-dev-team-{INSERT_TEAM_NAME}
       ### Loki
-      loki: 'true'
+      loki: 'false'
       loki-subscription-name: loki-operator
       # loki-version: 'loki-operator.v6.3.0'
       loki-channel: stable-6.3
@@ -207,21 +207,21 @@ hubClusterSets:
       loki-storageclass: gp3-csi
       loki-lokistack-name: logging-lokistack
       ### OpenShift Logging
-      logging: 'true'
+      logging: 'false'
       logging-subscription-name: cluster-logging
       # logging-version: 'cluster-logging.v6.3.0'
       logging-channel: stable-6.3
       logging-source: redhat-operators
       logging-source-namespace: openshift-marketplace
       ### Cluster Observability Operator
-      coo: 'true'
+      coo: 'false'
       coo-subscription-name: cluster-observability-operator
       # coo-version: 'cluster-observability-operator.v0.4.0'
       coo-channel: stable
       coo-source: redhat-operators
       coo-source-namespace: openshift-marketplace
       ### Compliance Operator Stig Apply
-      compliance: 'true'
+      compliance: 'false'
       compliance-subscription-name: compliance-operator
       # compliance-version: 'compliance-operator.v1.8.0'
       compliance-name: compliance-operator
