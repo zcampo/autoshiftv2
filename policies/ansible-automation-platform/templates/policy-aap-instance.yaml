@@ -16,6 +16,12 @@ metadata:
     policy.open-cluster-management.io/categories: Kubernetes MetalLB Operator
     policy.open-cluster-management.io/controls: OpenShift Standard
 spec:
+  dependencies:
+    - name: policy-aap-instance
+      namespace: {{ .Values.policy_namespace }}
+      apiVersion: policy.open-cluster-management.io/v1
+      compliance: Compliant
+      kind: Policy
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -134,7 +140,7 @@ spec:
                   lightspeed:
                     disabled: {{ "{{hub" }} index .ManagedClusterLabels "autoshift.io/aap-lightspeed-disabled" | default "true" {{ "hub}}" }}
                   redis_mode: standalone
-                  {{ "{{hub" }}"- if eq index .ManagedClusterLabels "autoshift.io/aap-custom-cabundle" | default "false" {{ "hub}}" }}
+                  {{ "{{hub" }}- if eq (index .ManagedClusterLabels "autoshift.io/aap-custom-cabundle" | default "false") "true" {{ "hub}}" }}
                   bundle_cacert_secret: {{ .Values.aap.cabundleName }}
                   {{ "{{hub" }}- end {{ "hub"}} }}
 ---
