@@ -1,3 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.gitops.argoNamespace }}
+  name: user-ca-bundle
+  labels:
+    config.openshift.io/inject-trusted-cabundle: "true"
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-aap-cert-bundle
+  namespace: {{ .Values.policy_namespace }}
+  annotations:
+    policy.open-cluster-management.io/standards: AutoShiftv2
+    policy.open-cluster-management.io/categories: Kubernetes MetalLB Operator
+    policy.open-cluster-management.io/controls: OpenShift Standard
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: aap-trusted-ca-bundle #figure this out
+          namespace: policies-autoshift
+        spec:
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
+          severity: high
+          object-templates-raw: |
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: Secret
+                metadata:
+                  name: {{ .Values.aap.cabundleName }}
+                  namespace: {{ .Values.aap.namespace }}
+                type: Opaque
+                data:
+                  trusted-ca-bundle: {{ $configmap := (lookup "v1" "ConfigMap" "{{ .Values.gitops.argoNamespace }}" user-ca-bundle.data[service-ca.crt]) }}
+---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
@@ -52,6 +93,9 @@ spec:
                   lightspeed:
                     disabled: {{ "{{hub" }} index .ManagedClusterLabels "autoshift.io/aap-lightspeed-disabled" | default "true" {{ "hub}}" }}
                   redis_mode: standalone
+                  {{ "{{hub" }}"- if eq index .ManagedClusterLabels "autoshift.io/aap-custom-cabundle" | default "false" {{ "hub}}" }}
+                  bundle_cacert_secret: {{ .Values.aap.cabundleName }}
+                  {{ "{{hub" }}- end {{ "hub"}} }}
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
