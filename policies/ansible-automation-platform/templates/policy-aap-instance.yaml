@@ -11,8 +11,7 @@ kind: ConfigMap
 metadata:
   namespace: "{{ .Values.aap.namespace }}"
   name: config-map-helper
-  data:
-    test: "{{ (lookup "v1" "ConfigMap" "ansible-automation-platform" "aap-eda-eda-env-properties").data.EDA_ALLOWED_HOSTS }}"
+  data: "{{ (lookup "v1" "ConfigMap" "ansible-automation-platform" "aap-eda-eda-env-properties").data }}"
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
