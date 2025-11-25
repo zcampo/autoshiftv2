@@ -11,8 +11,8 @@ kind: ConfigMap
 metadata:
   namespace: "{{ .Values.aap.namespace }}"
   name: config-map-helper
-  data: 
-    test: {{ ((lookup "v1" "ConfigMap" "ansible-automation-platform" "basic-config-map").tester) }}
+data: 
+  test: {{ ((lookup "v1" "ConfigMap" "ansible-automation-platform" "basic-config-map").tester) }}
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
