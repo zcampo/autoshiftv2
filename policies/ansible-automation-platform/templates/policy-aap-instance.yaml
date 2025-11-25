@@ -12,7 +12,7 @@ metadata:
   namespace: "{{ .Values.aap.namespace }}"
   name: config-map-helper
   data:
-    test: "{{ (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle") }}"
+    test: "{{ (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "aap-eda-eda-configmap").data.nginx_default_conf_template }}"
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
