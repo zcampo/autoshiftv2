@@ -44,7 +44,7 @@ spec:
                   namespace: {{ .Values.aap.namespace }}
                 type: Opaque
                 data:
-                  trusted-ca-bundle: {{ .Values.bundleMap.data.ca-bundle.crt }}
+                  trusted-ca-bundle: {{ index .Values "bundleMap.data "ca-bundle.crt" }}
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
