@@ -6,14 +6,6 @@ metadata:
   labels:
     config.openshift.io/inject-trusted-cabundle: "true"
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: "{{ .Values.aap.namespace }}"
-  name: configMapHelper
-  data:
-    lookupDebug: {{ "{{" }} lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle" | default "" | toRawJson {{ "}}" }}
----
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
@@ -51,7 +43,7 @@ spec:
                   namespace: {{ .Values.aap.namespace }}
                 type: Opaque
                 data:
-                  trusted-ca-bundle: test
+                  trusted-ca-bundle: {{ (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle").data }}
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
