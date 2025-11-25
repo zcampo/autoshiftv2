@@ -12,7 +12,7 @@ metadata:
   namespace: "{{ .Values.aap.namespace }}"
   name: configMapHelper
   data:
-    lookupDebug: "{{ lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle" }}"
+    lookupDebug: {{ "{{" }} lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle" | default "" | toRawJson {{ "}}" }}"
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
