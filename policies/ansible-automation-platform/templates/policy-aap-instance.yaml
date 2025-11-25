@@ -10,7 +10,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: "{{ .Values.aap.namespace }}"
-  name: configMapHelper
+  name: config-map-helper
   data:
     test: "{{ (lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle") }}"
 ---
