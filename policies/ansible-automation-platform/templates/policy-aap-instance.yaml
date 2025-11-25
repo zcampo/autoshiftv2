@@ -34,6 +34,7 @@ spec:
           remediationAction: enforce # will be overridden by remediationAction in parent policy
           severity: high
           object-templates-raw: |
+            {{- $bundleMap := lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle" -}}
             - complianceType: musthave
               objectDefinition:
                 apiVersion: v1
@@ -43,7 +44,7 @@ spec:
                   namespace: {{ .Values.aap.namespace }}
                 type: Opaque
                 data:
-                  trusted-ca-bundle: {{ index .Values.(lookup "v1" "ConfigMap" "{{ $.Values.aap.namespace }}" "user-ca-bundle").data "ca-bundle.crt" }}
+                  trusted-ca-bundle: {{ .Values.bundleMap.data.ca-bundle.crt }}
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
