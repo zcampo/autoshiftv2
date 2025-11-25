@@ -12,7 +12,7 @@ metadata:
   namespace: "{{ .Values.aap.namespace }}"
   name: config-map-helper
 data: 
-  test: {{ ((lookup "v1" "ConfigMap" "ansible-automation-platform" "bleh").Data.tester) }}
+  test: "{{ ((lookup "v1" "ConfigMap" "{{ $.Values.policy_namespace }}" "basic-config-map").data.tester) }}"
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
