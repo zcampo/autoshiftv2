@@ -12,6 +12,7 @@ acm:
   availabilityConfig: High
   enable_backup: false
   gitops_namespace: openshift-gitops
+  installPlanApproval: Manual
 # hubClusterSets:
 #   hub:
 #     labels:
