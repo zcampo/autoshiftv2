@@ -72,7 +72,7 @@ hubClusterSets:
       aap-lightspeed-disabled: 'true'
       #aap-version: aap-operator.v2.6.0-0.1762261205
       ### Set AAP up container group on this cluster
-      aap-cg: 'false'
+      aap-cg: 'true'
       ### Infrastructure Nodes
       infra-nodes: ''
       infra-nodes-numcpu: ''
@@ -357,4 +357,5 @@ managedClusterSets:
 #       worker-nodes-memory-mib:  '32768'
 #       worker-nodes-numcores-per-socket:  '4'
 #       worker-nodes:  '3'
+
 
