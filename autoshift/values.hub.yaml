@@ -73,6 +73,8 @@ hubClusterSets:
       #aap-version: aap-operator.v2.6.0-0.1762261205
       ### Set AAP up container group on this cluster
       aap-cg: 'true'
+      ### Create OCP Virt Permissions on this cluster
+      aap-ocp-virt: 'true'
       ### Infrastructure Nodes
       infra-nodes: ''
       infra-nodes-numcpu: ''
