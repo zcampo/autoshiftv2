@@ -146,8 +146,8 @@ The hub cluster is the main cluster with RHACM and its core components installed
 
     ```console
     export APP_NAME="autoshift"
-    export REPO_URL="https://github.com/auto-shift/autoshiftv2.git"
-    export TARGET_REVISION="main"
+    export REPO_URL="https://github.com/zcampo/autoshiftv2.git"
+    export TARGET_REVISION="aap"
     export VALUES_FILE="values.hub.yaml"
     export ARGO_PROJECT="default"
     export GITOPS_NAMESPACE="openshift-gitops"
