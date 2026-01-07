@@ -26,6 +26,7 @@ spec:
                 kind: ServiceAccount
                 metadata:
                   name: aap-virt-sa
+                  namespace: default
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
