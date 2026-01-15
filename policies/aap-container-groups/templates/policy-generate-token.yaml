@@ -33,6 +33,14 @@ spec:
                      command: ["/bin/bash", "-c"]
                      args:
                        - |
+                         echo "Checking if token already exists";
+                         oc get secret aap-sa-token &> /dev/null
+                         if [ $? -eq 0 ]; then
+                           echo "Secret aap-sa-token exists, exiting."
+                           exit 1
+                         else
+                           echo "Secret aap-sa-token does not exist, creating."
+                         fi
                          echo "Creating sa token";
                          TOKEN=$(oc create token aap-sa --duration=$((365*24))h);
                          echo "Create secret from token";
