@@ -101,7 +101,7 @@ spec:
                 kind: ServiceAccount
                 metadata:
                   name: oc-runner
-                   namespace: aap-runner
+                  namespace: aap-runner
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
