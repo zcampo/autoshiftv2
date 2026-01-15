@@ -1,7 +1,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  name: policy-aap-sa ##Figure out var
+  name: policy-aap-sa
   namespace: {{ .Values.policy_namespace }}
   annotations:
     policy.open-cluster-management.io/standards: AutoShiftv2
@@ -85,6 +85,77 @@ spec:
                   apiGroup: rbac.authorization.k8s.io
                   kind: Role
                   name: aap-sa-role
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: oc-runner-sa
+          namespace: policies-autoshift
+        spec:
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
+          severity: high
+          object-templates-raw: |
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: ServiceAccount
+                metadata:
+                  name: oc-runner
+                   namespace: aap-runner
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: oc-runner-role
+          namespace: policies-autoshift
+        spec:
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
+          severity: high
+          object-templates-raw: |
+            - complianceType: musthave
+              objectDefinition:
+                kind: Role
+                apiVersion: rbac.authorization.k8s.io/v1
+                metadata:
+                  name: oc-runner-role
+                  namespace: aap-runner
+                rules:
+                  - apiGroups:
+                      - ""
+                    resources:
+                      - serviceaccounts/token
+                      - pods
+                      - secrets
+                    verbs:
+                      - get
+                      - list
+                      - watch
+                      - create
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: oc-runner-rolebinding
+          namespace: policies-autoshift
+        spec:
+          remediationAction: enforce # will be overridden by remediationAction in parent policy
+          severity: high
+          object-templates-raw: |
+            - complianceType: musthave
+              objectDefinition:
+                kind: RoleBinding
+                apiVersion: rbac.authorization.k8s.io/v1
+                metadata:
+                  name: oc-runner-rolebinding
+                  namespace: aap-runner
+                subjects:
+                  - kind: ServiceAccount
+                    name: oc-runner-sa
+                    namespace: aap-runner
+                roleRef:
+                  apiGroup: rbac.authorization.k8s.io
+                  kind: Role
+                  name: oc-runner-role
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
@@ -126,5 +197,3 @@ subjects:
   - name: policy-aap-sa
     apiGroup: policy.open-cluster-management.io
     kind: Policy
-
-##### The Token for this SA will have to be created manually, as tokens are requests and not CRDs in openshift.  A token can be created by running "oc create token aap-sa --duration=$((365*24))h"
